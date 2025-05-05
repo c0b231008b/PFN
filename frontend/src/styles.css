@@ -1,0 +1,34 @@
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    font-family: sans-serif;
+    padding: 20px;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .results {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .results > div {
+    flex: 1;
+    background: #f2f2f2;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
