@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# 文章校正ツール — フロントエンド + Python FastAPI バックエンド
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+日本語文章を 800 文字以内で校正し、**差分ハイライト**と **コピー機能** を備えた Web アプリです。フロントエンドは **React + TypeScript + Tailwind CSS**、バックエンドは **FastAPI** で構成しています。
 
-## Available Scripts
+---
+## 準備
 
-In the project directory, you can run:
+### configの設定
+backend\src\config\config_template.yamlを参考にbackend\src\config\config.yamlを作成して下さい
 
-### `npm start`
+### フロントエンドセットアップ
+リポジトリ直下にて以下のコマンドを使用して仮想環境を作成し、入ります。
+```bash
+$ cd frontend
+# 依存関係一括インストール
+$ npm install
+# 差分ハイライト用ライブラリ
+$ npm install diff-match-patch  
+# 開発サーバー起動
+$ npm start                     # http://localhost:3000
+```
+### バックエンドセットアップ
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+cd ../backend
+python -m venv venv
+./venv/Scripts/activate
+pip install -r requirements.txt                   # fastapi, uvicorn 等
+uvicorn main:app --reload                         # http://localhost:8000
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+##  実装の工夫ポイント
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| # | 概要          | 技術・工夫点                                                                      |
+| - | ----------- | --------------------------------------------------------------------------- |
+| 1 | **差分ハイライト** | `diff-match-patch` で挿入文(緑)・削除文(赤取り消し線)をリアルタイム描画。ハイライト ON/OFF トグル付き。         |
+| 2 | **UX 向上**   | - Copy ボタン & Toast- 文字数カウント (残 50 文字→amber、超過→red)- ローディング "校閲中です…" アニメーション |
+| 3 | **校閲精度**   | 複数に分割してLLMに校閲をさせることで、校閲精度向上             |
+| 4 | **プロンプト**    | CoTを用い、校閲精度向上     |
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
