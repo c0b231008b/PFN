@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+      /* ----------- 出力ターゲット ----------- */
+      "target": "ES2017",
+      "lib": ["DOM", "DOM.Iterable", "ESNext"],
+  
+      /* ----------- モジュール解決 ----------- */
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+  
+      /* ----------- JSX / React ----------- */
+      "jsx": "react-jsx",          // React18 以降はこれ
+  
+      /* ----------- 型チェックと安全性 ----------- */
+      "strict": true,              // 型安全を高める。エラーが多すぎるなら false で緩和
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "skipLibCheck": true,        // 依存パッケージの型チェックをスキップしてビルド高速化
+  
+      /* ----------- 互換性／インポート設定 ----------- */
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "allowJs": true              // 既存の .js ファイルをそのまま取り込める
+    },
+  
+    /* src 以下だけを型チェック対象にする */
+    "include": ["src"]
+  }
+  
