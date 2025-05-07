@@ -1,0 +1,4 @@
+[flake8]
+ignore = E402,E203,W293
+max-line-length = 1000
+exclude = /*
